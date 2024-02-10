@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from .forms import LoginForm , UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
@@ -22,6 +22,11 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request,'users/login.html',{'form':form})
+
+def logout_user(request):
+    logout(request)
+    return render(request,'users/logout.html')
+
 
 @login_required
 def index(request):
